@@ -1,0 +1,50 @@
+using UnityEngine;
+using System.Collections;
+
+public class CharacterManager : MonoBehaviour {
+
+    public static Character[] Characters;
+
+    void Start(){
+        Characters = new Character[1] { CreateCrysten() };
+    }
+
+
+    static Character getCharacter(string name)
+    {
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            if (name == Characters[i].name)
+            {
+                return Characters[i];
+            }
+        }
+        Debug.Log("Character name " + name + " not in list");
+        return new Character();
+    }
+
+    public static void increaseFriendship(string name, int amount)
+    {
+        Character charReferance = getCharacter(name);
+        charReferance.friendship += amount;
+        Debug.Log(CharacterManager.Characters[0].friendship);
+    }
+
+    //Character creators
+    Character CreateCrysten()//Replace?
+    {
+        Conversation[] Conversations = new Conversation[4];
+        string[] convoIn;
+
+        convoIn = new string[3] { "Hello there!", "My name is test NPC!", "Today we are testing conversation logic!" };
+        Conversations[0] = new Conversation(0, convoIn, 11);
+        convoIn = new string[1] { "This is my second possible conversation! Its made from one single sentance, but its quite a long one! The next one will only be available if you punch the tree over there, otherwise, I will say hello!" };
+        Conversations[1] = new Conversation(1, convoIn, false, 2);
+        convoIn = new string[2] { "You went into the forest huh?", "Didn't think anyone around here had the guts. Good job, kid." };
+        Conversations[2] = new Conversation(2, convoIn, false, 2);
+        convoIn = new string[1] { "This is a second default conversation!" };
+        Conversations[3] = new Conversation(0, convoIn, 1);
+
+        return new Character("Crysten", Conversations);
+    }
+}
