@@ -1,0 +1,18 @@
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+//Spawn in enemies. Outdated.
+
+public class GameController : MonoBehaviour {
+
+    public Texture2D cursor;
+
+    public static GameObject itemBubble;
+
+	// Use this for initialization
+    void Start()
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+    }
+}
